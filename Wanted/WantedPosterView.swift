@@ -7,6 +7,12 @@
 
 import SwiftUI
 
+extension ShapeStyle where Self == Color {
+    static var darkBrown: Color {
+        Color(red: 0.3, green: 0.2, blue: 0.1)
+    }
+}
+
 struct WantedPosterView: View {
     var image: Image?
     var crime: String
@@ -15,23 +21,28 @@ struct WantedPosterView: View {
     var paperOpacity: Double
 
     var body: some View {
-        VStack(spacing: 0) {
-            Text("WANTED")
-            Text("DEAD OR ALIVE")
+        ZStack {
+            Color.white
 
-            image
+            VStack(spacing: 0) {
+                Text("WANTED")
+                Text("DEAD OR ALIVE")
 
-            Text("For \(crime)")
+                image
 
-            Spacer()
+                Text("For \(crime)")
 
-            Text("REWARD")
-            Text(reward)
+                Spacer()
 
-            Spacer()
+                Text("REWARD")
+                Text(reward)
 
-            Text(contact)
+                Spacer()
+
+                Text(contact)
+            }
         }
+        .frame(width: 420, height: 594)
     }
 }
 

@@ -31,6 +31,7 @@ struct ContentView: View {
                 reward: "$500",
                 contact: "Turn yourself in, thief!",
                 paperOpacity: 0.75))
+        renderer.scale = 3
 
         if let image = renderer.uiImage {
             renderedPoster = Image(uiImage: image)
