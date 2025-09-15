@@ -22,25 +22,60 @@ struct WantedPosterView: View {
 
     var body: some View {
         ZStack {
-            Color.white
+            Image(.paper)
+                .resizable()
+                .scaledToFill()
+                .frame(minWidth: .zero, maxWidth: .infinity, minHeight: .zero, maxHeight: .infinity)
+                .opacity(paperOpacity)
 
             VStack(spacing: 0) {
                 Text("WANTED")
+                    .font(.custom("Superclarendon", size: 60))
+                    .fontWeight(.black)
+                    .tracking(5)
+                    .foregroundStyle(.darkBrown)
+                    .padding(.bottom, -10)
+
                 Text("DEAD OR ALIVE")
+                    .font(.custom("Copperplate", size: 24))
+                    .bold()
+                    .tracking(2)
+                    .foregroundStyle(.darkBrown)
 
                 image
 
                 Text("For \(crime)")
+                    .font(.custom("Copperplate", size: 22))
+                    .multilineTextAlignment(.center)
+                    .bold()
+                    .tracking(1)
+                    .foregroundStyle(.darkBrown)
 
                 Spacer()
 
                 Text("REWARD")
+                    .font(.custom("Copperplate", size: 30))
+                    .tracking(3)
+                    .bold()
+                    .foregroundStyle(.darkBrown)
+
                 Text(reward)
+                    .font(.custom("Copperplate", size: 44))
+                    .bold()
+                    .tracking(2)
+                    .foregroundStyle(.darkBrown)
 
                 Spacer()
 
                 Text(contact)
+                    .font(.custom("Copperplate", size: 18))
+                    .multilineTextAlignment(.center)
+                    .bold()
+                    .foregroundStyle(.darkBrown)
+                    .padding(.bottom, 10)
             }
+            .shadow(color: .white, radius: 3)
+            .padding(.horizontal)
         }
         .frame(width: 420, height: 594)
     }
