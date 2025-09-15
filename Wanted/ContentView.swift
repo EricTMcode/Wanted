@@ -11,6 +11,9 @@ import SwiftUI
 struct ContentView: View {
     @State private var renderedPoster: Image?
 
+    @State private var inputPickerItem: PhotosPickerItem?
+    @State private var inputImage: Image?
+
     @AppStorage("crime") private var crime = "Train Robbery, Horse Rustling, and Other Naughtiness"
     @AppStorage("reward") private var reward = "$500"
     @AppStorage("contact") private var contact = "Contact the Sheriff with any information."
@@ -22,6 +25,10 @@ struct ContentView: View {
                 renderedPoster?
                     .resizable()
                     .scaledToFit()
+
+                Section {
+                    PhotosPicker("Select an image", selection: $inputPickerItem, matching: .images)
+                }
 
                 Section("What's their crime?") {
                     TextField("Enter a crime", text: $crime, axis: .vertical)
@@ -42,6 +49,12 @@ struct ContentView: View {
             .navigationTitle("Design your poster")
             .navigationBarTitleDisplayMode(.inline)
             .onChange(of: [crime, reward, contact, String(paperOpacity)], render)
+            .onChange(of: inputPickerItem) {
+                Task {
+                    inputImage = try? await inputPickerItem?.loadTransferable(type: Image.self)
+                    render()
+                }
+            }
         }
         .onAppear(perform: render)
     }
@@ -49,6 +62,7 @@ struct ContentView: View {
     func render() {
         let renderer = ImageRenderer(
             content: WantedPosterView(
+                image: inputImage,
                 crime: crime,
                 reward: reward,
                 contact: contact,
