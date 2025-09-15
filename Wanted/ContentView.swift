@@ -25,6 +25,7 @@ struct ContentView: View {
                 renderedPoster?
                     .resizable()
                     .scaledToFit()
+                    .listRowInsets(EdgeInsets())
 
                 Section {
                     PhotosPicker("Select an image", selection: $inputPickerItem, matching: .images)
@@ -48,6 +49,8 @@ struct ContentView: View {
             }
             .navigationTitle("Design your poster")
             .navigationBarTitleDisplayMode(.inline)
+            .listSectionSpacing(.compact)
+            .scrollDismissesKeyboard(.interactively)
             .onChange(of: [crime, reward, contact, String(paperOpacity)], render)
             .onChange(of: inputPickerItem) {
                 Task {
