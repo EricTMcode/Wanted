@@ -55,6 +55,11 @@ struct ContentView: View {
                     render()
                 }
             }
+            .toolbar {
+                if let renderedPoster {
+                    ShareLink(item: renderedPoster, preview: SharePreview("Wanted for \(crime)", image: renderedPoster))
+                }
+            }
         }
         .onAppear(perform: render)
     }
